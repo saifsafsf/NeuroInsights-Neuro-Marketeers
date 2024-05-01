@@ -1,0 +1,72 @@
+.outer {
+  background-color: #010511; /* Dark background color */
+  min-height: 100vh; /* Full viewport height */
+  width: 100%; /* Full width */
+  padding-top: 50px; /* If Navbar has fixed height */
+}
+
+.dashboard-container {
+  width: 80%;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+  color: white; /* All text inside the dashboard to white */
+  background-color: #010511; /* Dashboard background */
+  text-align: center;
+}
+
+.example-cell {
+  border: 1px solid #333;
+}
+
+.example-cell:nth-child(2) {
+  width: 15%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Lighter shadow for contrast */
+  background-color: #010511; /* Background color for table */
+}
+
+th {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Light border for some contrast */
+  color: white; /* Ensuring text in cells is white */
+}
+
+td {
+  padding: 8px;
+  text-align: left; /* Light border for some contrast */
+  color: white; /* Ensuring text in cells is white */
+  border-bottom: 1px solid white; /* Make borders darker for contrast */
+  border-right: 1px solid white;
+}
+
+th {
+  background-color: #333; /* Slightly lighter header for distinction */
+}
+
+button {
+  padding: 5px 10px;
+  margin-right: 10px;
+  background-color: #007BFF;
+  color: white;
+  border: 1px solid white; /* Added border to make buttons stand out */
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button {
+  background-color: #dc3545; /* Bootstrap red */
+}
+
+.delete-button:hover {
+  background-color: #c82333; /* Darker red */
+}

@@ -1,0 +1,10 @@
+flask
+flask_cors
+python-dotenv
+pymongo
+flask_pymongo
+flask_bcrypt
+flask_cors
+PyJWT
+tiktoken
+waitress

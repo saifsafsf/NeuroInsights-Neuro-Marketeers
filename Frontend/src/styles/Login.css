@@ -1,0 +1,153 @@
+.loginPage {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  
+    width: 100vw;   
+    margin: 0 auto;
+    background-color: #010511;
+  }
+  
+  .loginPage .wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100vh;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    border: 1px solid red;
+  justify-content: space-around; /* Space around the elements inside the wrapper */
+  align-items: stretch; /* Stretch children to match the height */
+  height: 100vh;
+  border: none;
+  }
+  .loginPage .illustration img {
+    max-height: 100%;
+    width: auto;
+    max-width: 100%; /* Limit the width to its parent's size, maintain aspect ratio */
+    object-fit: contain;
+    margin: 0 auto;
+  }
+  .loginPage .wrapper p {
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
+  
+  .loginPage .form {
+    padding: 1.5rem;
+    -ms-flex-preferred-size: 100vw;
+    flex-basis: 100vw;
+    color: white;
+  }
+  
+  .loginPage .form .heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .loginPage .or {
+    margin: 1rem 0;
+  }
+  
+  .loginPage .form label {
+    display: block;
+    margin: 1.25rem 0 1rem 0;
+  }
+  
+  .loginPage .form input {
+    height: 40px;
+    width: 100%;
+    padding: 15px;
+    background-color: #f1f9ff;
+    border: 2px solid #bce0fd;
+    border-radius: 8px;
+  }
+  
+  .loginPage .form button {
+    height: 40px;
+    width: 100%;
+    background-color: #258de6;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    border-radius: 8px;
+  }
+  
+  @media (min-width: 542px) {
+    .loginPage body {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+    }
+    .loginPage .wrapper {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      height: 100vh;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -ms-flex-pack: distribute;
+      justify-content: space-around;
+      padding: 1.5rem;
+      max-width: 1100px;
+    }
+    .loginPage .form {
+      -ms-flex-preferred-size: auto;
+      flex-basis: auto;
+    }
+    .loginPage .form input {
+      width: 250px;
+    }
+    .loginPage .illustration img {
+      max-width: 80%;
+      height: auto;
+    }
+  }
+  
+  @media (max-width: 680px) {
+    .loginPage .illustration {
+      display: none;
+    }
+  }
+  
+  .loginPage .signUp .illustration {
+    order: 2;
+    justify-self: flex-end;
+    margin-left: 2rem;
+  }
+  
+  .loginPage button:hover {
+    filter: brightness(95%);
+  }
+  
+  .loginPage button:active {
+    transform: scale(0.98);
+  } 
+ 
+
+
+  .loginPage .illustration, .loginPage .form {
+    flex: 1; /* Give equal space to both the illustration and the form */
+    display: flex;
+    flex-direction: column; /* Stack the children vertically */
+    justify-content: center; /* Center the content vertically */
+    align-items: center; /* Center the content horizontally */
+  }

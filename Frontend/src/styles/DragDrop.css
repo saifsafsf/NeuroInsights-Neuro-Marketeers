@@ -1,0 +1,41 @@
+.drag-drop-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #010511;
+}
+
+.dropzone {
+    width: 400px;
+    height: 300px;
+    border: 2px dashed #89CFF0; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #89CFF0; 
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.upload-button {
+    padding: 10px 20px;
+    background-color: #89CFF0; 
+    color: white;
+    border: none;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.upload-button:disabled {
+    background-color: grey;
+    cursor: default;
+}
+
+.upload-info {
+    color: #89CFF0; 
+    font-size: 1rem;
+    margin-top: 10px;
+}
