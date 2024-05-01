@@ -10,7 +10,7 @@ from transformers import PegasusForConditionalGeneration, PegasusTokenizer
 env_vars = dotenv_values(".env")
 
 
-def eval_model(dataloaders, device, tokenizer, model, output_all_results_path = './results/temp.txt' ):
+def eval_model(dataloaders, device, tokenizer, model):
 
     model.eval()   # Set model to evaluate mode
     running_loss = 0.0
@@ -20,45 +20,44 @@ def eval_model(dataloaders, device, tokenizer, model, output_all_results_path = 
     
     pred_tokens_list = []
     pred_string_list = []
-    with open(output_all_results_path,'w', encoding='utf-8') as f:
-        for input_embeddings, input_masks, input_mask_invert, target_ids in dataloaders['test']:
-            
-            input_embeddings_batch = input_embeddings.to(device).float()
-            input_masks_batch = input_masks.to(device)
-            target_ids_batch = target_ids.to(device)
-            input_mask_invert_batch = input_mask_invert.to(device)
-            target_ids_batch[target_ids_batch == tokenizer.pad_token_id] = -100 
+    for input_embeddings, input_masks, input_mask_invert, target_ids in dataloaders['test']:
+        
+        input_embeddings_batch = input_embeddings.to(device).float()
+        input_masks_batch = input_masks.to(device)
+        target_ids_batch = target_ids.to(device)
+        input_mask_invert_batch = input_mask_invert.to(device)
+        target_ids_batch[target_ids_batch == tokenizer.pad_token_id] = -100 
 
-            # forward
-            seq2seqLMoutput = model(input_embeddings_batch, input_masks_batch, input_mask_invert_batch, target_ids_batch)
+        # forward
+        seq2seqLMoutput = model(input_embeddings_batch, input_masks_batch, input_mask_invert_batch, target_ids_batch)
 
-            """calculate loss"""
-            loss = seq2seqLMoutput.loss 
+        """calculate loss"""
+        loss = seq2seqLMoutput.loss 
 
-            logits = seq2seqLMoutput.logits
-            probs = logits[0].softmax(dim = 1)
-            
-            _, predictions = probs.topk(1)
-            
-            predictions = torch.squeeze(predictions)
-            predicted_string = tokenizer.decode(predictions).split('</s></s>')[0].replace('<s>','',)
-            predictions = predictions.tolist()
+        logits = seq2seqLMoutput.logits
+        probs = logits[0].softmax(dim = 1)
+        
+        _, predictions = probs.topk(1)
+        
+        predictions = torch.squeeze(predictions)
+        predicted_string = tokenizer.decode(predictions).split('</s></s>')[0].replace('<s>','',)
+        predictions = predictions.tolist()
 
-            truncated_prediction = []
-            for t in predictions:
-            
-                if t != tokenizer.eos_token_id:
-                    truncated_prediction.append(t)
-                else:
-                    break
-            
-            pred_tokens = tokenizer.convert_ids_to_tokens(truncated_prediction, skip_special_tokens = True)
-            
-            pred_tokens_list.append(pred_tokens)
-            pred_string_list.append(predicted_string)
-            
-            sample_count += 1
-            running_loss += loss.item() * input_embeddings_batch.size()[0]
+        truncated_prediction = []
+        for t in predictions:
+        
+            if t != tokenizer.eos_token_id:
+                truncated_prediction.append(t)
+            else:
+                break
+        
+        pred_tokens = tokenizer.convert_ids_to_tokens(truncated_prediction, skip_special_tokens = True)
+        
+        pred_tokens_list.append(pred_tokens)
+        pred_string_list.append(predicted_string)
+        
+        sample_count += 1
+        running_loss += loss.item() * input_embeddings_batch.size()[0]
 
     predicted_para = ' '.join(pred_string_list)
     API_KEY = env_vars.get('API_KEY')
@@ -88,9 +87,7 @@ def getEegResults(file_path):
     bands_choice = ["_t1", "_t2", "_a1", "_a2", "_b1", "_b2", "_g1", "_g2"]
     
     dataset_setting = 'unique_sent'
-    task_name = "task1_task2_taskNRv2"
     model_name = "BrainTranslator"
-    output_all_results_path = f'./results/{task_name}-{model_name}-all_decoding_results.txt'
 
     ''' set random seeds '''
     seed_val = 312
@@ -127,7 +124,7 @@ def getEegResults(file_path):
     model.to(device)
 
     ''' eval '''
-    predicted_para = eval_model(dataloaders, device, tokenizer, model, output_all_results_path = output_all_results_path)
+    predicted_para = eval_model(dataloaders, device, tokenizer, model)
     return predicted_para
 
 if __name__ == "__main__":
