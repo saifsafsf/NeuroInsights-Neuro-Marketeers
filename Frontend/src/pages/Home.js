@@ -27,13 +27,13 @@ const Home = () => {
 
   const onDrop = useCallback(acceptedFiles => {
     const file = acceptedFiles[0];
-    if (file && file.name.endsWith('.pickle')) {
+    if (file && file.name.endsWith('.mat')) {
       setFile(file);
       setFileName(file.name);
       setUploadSuccess(false);
       uploadFile(file); // Call upload function directly after file is set
     } else {
-      alert('Only .pickle files are allowed.');
+      alert('Only .mat files are allowed.');
       setFileName('');
       setFile(null);
     }
@@ -42,7 +42,7 @@ const Home = () => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     multiple: false,
-    accept: '.pickle'
+    accept: '.mat'
   });
 
   const uploadFile = async (file) => {
@@ -99,7 +99,7 @@ const Home = () => {
         <input {...getInputProps()} />
         {isDragActive ?
           <p>Drop the file here...</p> :
-          <p>Drag 'n' drop a .pickle file here, or click to select file</p>
+          <p>Drag 'n' drop a .mat file here, or click to select file</p>
         }
       </div>
       {fileName && uploadSuccess && (

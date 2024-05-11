@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 from torch.utils.data import DataLoader
-import pickle
+from util.construct_dataset_mat_to_pickle_v1 import mat_to_dict
 from dotenv import dotenv_values
 from data import ZuCo_dataset
 from model_decoding import BrainTranslator
@@ -99,9 +99,7 @@ def getEegResults(file_path):
 
     ''' set up dataloader '''
     whole_dataset_dicts = []
-    dataset_path_task = file_path
-    with open(dataset_path_task, 'rb') as handle:
-        whole_dataset_dicts.append(pickle.load(handle))
+    whole_dataset_dicts.append(mat_to_dict(file_path))
         
     model_name = 'google/pegasus-xsum'
     tokenizer = PegasusTokenizer.from_pretrained(model_name)
@@ -128,6 +126,4 @@ def getEegResults(file_path):
     return predicted_para
 
 if __name__ == "__main__":
-    print(getEegResults("./eeg/66280bbf4ad19ddf9079666f/1713987191557.pickle"))
-
-
+    print(getEegResults("./dataset/ZuCo/task2-NR/mat_files/resultsZAB1_NR_0-5.mat"))

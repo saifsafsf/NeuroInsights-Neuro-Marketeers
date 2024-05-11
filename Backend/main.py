@@ -29,7 +29,7 @@ users_collection = mongo.db.users
 results_collection = mongo.db.uploaded_eegs
 
 UPLOAD_FOLDER = './eeg'  # Set the path to your upload folder
-ALLOWED_EXTENSIONS = {'pickle'}  # Set the allowed file extensions
+ALLOWED_EXTENSIONS = {'mat'}  # Set the allowed file extensions
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def get_credentials():
@@ -128,7 +128,7 @@ def upload_eeg():
     print("Check 2")
     if file and allowed_file(file.filename):
         time_of_upload = str(int(time.time() * 1000))
-        name_of_file = time_of_upload + '.pickle'
+        name_of_file = time_of_upload + '.mat'
         filename = secure_filename(name_of_file)
         file_path = os.path.join(user_folder, filename)
         file.save(file_path)
@@ -149,7 +149,7 @@ def upload_eeg():
             # 'cos_sim': cos_sim
         })
     else:
-        return jsonify({'error': 'Invalid file type. Only .pickle files are allowed'}), 400
+        return jsonify({'error': 'Invalid file type. Only .mat files are allowed'}), 400
     
 
 @app.route('/get_user_results', methods=['GET'])
