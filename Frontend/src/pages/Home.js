@@ -53,7 +53,7 @@ const Home = () => {
       cancelSource.current = axios.CancelToken.source();
 
       try {
-          const response = await axios.post('http://localhost:5000/upload_eeg', formData, {
+          const response = await axios.post('http://172.208.115.234:8080/upload_eeg', formData, {
               headers: {
                   'Authorization': `Bearer ${aToken}`,
                   'Content-Type': 'multipart/form-data'

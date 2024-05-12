@@ -18,7 +18,7 @@ export default function Login() {
                     Authorization: token,
                 }
             };
-            let response = await axios.post('http://localhost:5000/verify_token', null, config);
+            let response = await axios.post('http://172.208.115.234:8080/verify_token', null, config);
             if (response.status === 200) {
                 navigate('/Home'); // Adjust the route as per your app's requirement
             }
@@ -56,7 +56,7 @@ export default function Login() {
 
         setLoading(true);
         try {
-            let response = await axios.post('http://localhost:5000/login', form);
+            let response = await axios.post('http://172.208.115.234:8080/login', form);
 
             if (response.status === 200) {
                 let token = response.data.token;

@@ -11,7 +11,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/get_user_results', {
+        const { data } = await axios.get('http://172.208.115.234:8080/get_user_results', {
           headers: { Authorization: `Bearer ${localStorage.getItem('eeg_token')}` }
         });
         setResults(data);
@@ -31,7 +31,7 @@ const Dashboard = () => {
     const the_id = resultId.$oid
     if (window.confirm('Are you sure you want to delete this result?')) {
       try {
-        await axios.delete(`http://localhost:5000/delete_result/${the_id}`, {
+        await axios.delete(`http://172.208.115.234:8080/delete_result/${the_id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('eeg_token')}` }
         });
         setResults(prevResults => prevResults.filter(result => result._id !== resultId)); // Update state to remove the deleted item
