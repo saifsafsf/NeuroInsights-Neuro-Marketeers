@@ -8,3 +8,9 @@ flask_cors
 PyJWT
 tiktoken
 waitress
+numpy
+torch
+nltk
+rouge
+sentence_transformers
+openai
